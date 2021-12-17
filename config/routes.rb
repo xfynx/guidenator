@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get '/example', to: 'example#index'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :deeper do
+    get 'another_example', to: 'another_example#index'
+  end
+
+  get '/:post_slug', to: 'post#show_parent'
 end
