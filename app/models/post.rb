@@ -14,6 +14,10 @@ class Post < ApplicationRecord
     post_items.where(chapter: nil)
   end
 
+  def available
+    sections.or(post_items.where(chapter: {published: true}))
+  end
+
   # if we have at least one content item (section or chapter) - it's parent post obviously
   def parent?
     post_items.present?

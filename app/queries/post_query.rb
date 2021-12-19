@@ -6,7 +6,7 @@ class PostQuery
 
   def parent_post
     @parent_post ||= Post.
-      includes(:post_items).
+      includes(post_items: [:chapter]).
       find_by(slug: @post_slug, published: true)
   end
 
@@ -14,7 +14,7 @@ class PostQuery
     return if @chapter_slug.blank?
 
     @chapter_post ||= Post.
-      includes(parent_post: [:post_items]).
+      includes(:parent_post).
       find_by(slug: @chapter_slug, parent_post: { slug: @post_slug, published: true }, published: true)
   end
 end

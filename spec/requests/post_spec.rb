@@ -10,6 +10,7 @@ RSpec.describe "Posts", type: :request do
     it 'returns existing post by slug' do
       get "/#{parent_post.slug}"
       expect(response).to have_http_status(200)
+      # should be improved: rendering should be checked in controller's specs
       expect(response.body).to match("Post id: #{parent_post.id}")
     end
 
@@ -45,6 +46,7 @@ RSpec.describe "Posts", type: :request do
     it 'returns chapter post' do
       get "/#{parent.slug}/#{chapter.slug}"
       expect(response).to have_http_status(200)
+      # should be improved: rendering should be checked in controller's specs
       expect(response.body).to match("Post id: #{chapter.id}")
     end
 

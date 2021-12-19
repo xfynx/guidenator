@@ -37,12 +37,16 @@ RSpec.describe Post, type: :model do
 
     before do
       parent_post.post_items.create(chapter: chapter, order: 2)
-      parent_post.post_items.create(chapter: create(:post), order: 3)
+      parent_post.post_items.create(chapter: create(:post, published: true), order: 3)
       parent_post.post_items.create(section: 'some-section', order: 1)
     end
 
     it 'returns all post_items with section only' do
       expect(parent_post.sections.pluck(:order)).to eq([1])
+    end
+
+    it 'returns published chapters and sections' do
+      expect(parent_post.available.pluck(:order)).to eq([3, 1])
     end
 
     it 'returns all related chapters which is related posts' do
