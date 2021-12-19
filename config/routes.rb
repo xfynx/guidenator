@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   end
 
   get '/:post_slug', to: 'post#show_parent'
+  get '/:post_slug/:chapter_slug', to: 'post#show_chapter'
 end
