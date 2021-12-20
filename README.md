@@ -27,12 +27,15 @@ rails s
 
 ## Usage
 
-Seeds contains several pages:
-- `http://localhost:3000/layouts-and-rendering-in-rails` and it's chapters (one chapter is not published)
-- `http://localhost:3000/bulma-the-modern-css-framework-that-just-works` with only one chapter
-- `http://localhost:3000/draft` with one chapter. This exact returns 404 cause it's not published. 
-  And even with published chapter (`http://localhost:3000/draft/this-chapter-published`) it should not work in any way.
+Heroku demo app available at http://arcane-reaches-02104.herokuapp.com
 
+Seeds contains several pages:
+- [/layouts-and-rendering-in-rails](http://arcane-reaches-02104.herokuapp.com/layouts-and-rendering-in-rails) and it's chapters (one chapter is not published)
+- [/bulma-the-modern-css-framework-that-just-works](http://arcane-reaches-02104.herokuapp.com/bulma-the-modern-css-framework-that-just-works) with only one chapter
+- [/draft](http://arcane-reaches-02104.herokuapp.com/draft) with one chapter. This exact returns 404 cause it's not published. 
+  And even with published chapter ([/draft/this-chapter-published](http://arcane-reaches-02104.herokuapp.com/draft/this-chapter-published)) it should not work in any way.
+
+In addition, every page can be fetched as json. Just add `.json` at the end of url and you'll see json with ToC and current post content.
 
 ## TODO
 
