@@ -1,0 +1,30 @@
+<% # TODO: should be improved through helper methods and splitting by partials %>
+<h4>Table of content</h4>
+<aside class="menu">
+  <% list_opened = false %>
+  <% toc.each do |item| %>
+    <% if item[:type] == :section %>
+      <% if list_opened %>
+        <% list_opened = false %>
+        </ul>
+      <% end %>
+      <p class="menu-label"><%= item[:name] %></p>
+    <% elsif item[:type] == :post %>
+      <% unless list_opened %>
+        <% list_opened = true %>
+        <ul class="menu-list">
+      <% end %>
+      <li>
+        <%= link_to item[:name], show_chapter_path(post_slug: params[:post_slug], chapter_slug: item[:slug]),
+                    class: @title == item[:name] ? 'is-active' : '' %>
+      </li>
+    <% end %>
+  <% end %>
+  <% if list_opened %></ul><% end %>
+
+  <% unless @title == parent_title %>
+    <p class="menu-label">
+      <%= link_to "Back to \"#{parent_title}\"", show_parent_path(post_slug: params[:post_slug]) %>
+    </p>
+  <% end %>
+</aside>

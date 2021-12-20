@@ -24,6 +24,8 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
+gem "bulma-rails", "~> 0.9.2"
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -62,5 +64,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'rspec'
+  gem 'rspec-json_expectations'
   gem 'factory_bot'
 end

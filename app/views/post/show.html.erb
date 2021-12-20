@@ -1,0 +1,9 @@
+<div class="columns">
+  <div class="column is-one-quarter">
+    <%= render partial: 'table_of_content', locals: { parent_title: @result[:parent_title], toc: @result[:toc] } %>
+  </div>
+  <div class="column">
+    <h1><%= @result[:title] %></h1>
+    <p><%= @result[:body] %></p>
+  </div>
+</div>

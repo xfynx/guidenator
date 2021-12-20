@@ -8,21 +8,21 @@ RSpec.describe "Posts", type: :request do
     end
 
     it 'returns existing post by slug' do
-      get "/#{parent_post.slug}"
+      get "/#{parent_post.slug}.json"
       expect(response).to have_http_status(200)
       # should be improved: rendering should be checked in controller's specs
-      expect(response.body).to match("Post id: #{parent_post.id}")
+      expect(JSON.parse(response.body)).to include_json(title: parent_post.title)
     end
 
     it 'returns 404 if no post found' do
-      expect { get '/non-existing-slug' }.to raise_error(ActionController::RoutingError)
+      expect { get '/non-existing-slug.json' }.to raise_error(ActionController::RoutingError)
     end
 
     context 'post not published' do
       let(:published) { false }
 
       it 'returns 404' do
-        expect { get "/#{parent_post.slug}" }.to raise_error(ActionController::RoutingError)
+        expect { get "/#{parent_post.slug}.json" }.to raise_error(ActionController::RoutingError)
       end
     end
 
@@ -30,7 +30,7 @@ RSpec.describe "Posts", type: :request do
       let(:parent_post) { create(:post, slug: 'some-slug', published: published) }
 
       it 'returns 404' do
-        expect { get "/#{parent_post.slug}" }.to raise_error(ActionController::RoutingError)
+        expect { get "/#{parent_post.slug}.json" }.to raise_error(ActionController::RoutingError)
       end
     end
   end
@@ -44,34 +44,34 @@ RSpec.describe "Posts", type: :request do
     end
 
     it 'returns chapter post' do
-      get "/#{parent.slug}/#{chapter.slug}"
+      get "/#{parent.slug}/#{chapter.slug}.json"
       expect(response).to have_http_status(200)
       # should be improved: rendering should be checked in controller's specs
-      expect(response.body).to match("Post id: #{chapter.id}")
+      expect(JSON.parse(response.body)).to include_json(title: chapter.title)
     end
 
     context 'not published chapter' do
       let(:published_chapter) { false }
 
       it 'returns 404' do
-        expect { get "/#{parent.slug}/#{chapter.slug}" }.to raise_error(ActionController::RoutingError)
+        expect { get "/#{parent.slug}/#{chapter.slug}.json" }.to raise_error(ActionController::RoutingError)
       end
     end
 
     it 'returns 404 if different parent slug passed' do
-      expect { get "/not-a-parent-slug/#{chapter.slug}" }.to raise_error(ActionController::RoutingError)
+      expect { get "/not-a-parent-slug/#{chapter.slug}.json" }.to raise_error(ActionController::RoutingError)
     end
 
     context 'parent post is not published' do
       let(:published_parent) { false }
 
       it 'returns 404' do
-        expect { get "/#{parent.slug}/#{chapter.slug}" }.to raise_error(ActionController::RoutingError)
+        expect { get "/#{parent.slug}/#{chapter.slug}.json" }.to raise_error(ActionController::RoutingError)
       end
     end
 
     it 'returns 404 if no chapter post found' do
-      expect { get "/#{parent.slug}/non-existing-chapter" }.to raise_error(ActionController::RoutingError)
+      expect { get "/#{parent.slug}/non-existing-chapter.json" }.to raise_error(ActionController::RoutingError)
     end
   end
 end
